@@ -1,7 +1,6 @@
 const router = require('express').Router();
-const { notStrictEqual } = require('assert');
 const fs = require('fs');
-let db = require('../db/db.json');
+let db = require('../../db/db.json');
 
 // GET - request data from '/notes' and respond in JSON
 router.get('/notes', (req, res) => {
@@ -13,7 +12,7 @@ router.get('/notes', (req, res) => {
 // POST - send data to server
 router.post('/notes', (req, res) => {
     let newNote = {
-        id: notes.lengthtoString(),
+        id: db.length.toString(),
         title: req.body.title,
         text: req.body.text
     }
