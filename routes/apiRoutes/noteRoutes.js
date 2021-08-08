@@ -25,4 +25,24 @@ router.post('/notes', (req, res) => {
     res.json(db);
 });
 
+//BONUS: Delete requests
+router.delete('/notes/:id', (req, res) => {
+    let db = require('../../db/db.json');
+    let savedNotes = [];
+
+    for(let i = 0; i < db.length; i++) {
+        if(parseInt(db[i].id) !== parseInt(req.params.id)) {
+            savedNotes.push(db[i]);
+        }
+    }
+
+    db = savedNotes;
+    fs.writeFileSync('./db/db.json', JSON.stringify(db), (err, res) => {
+        if(err) throw err;
+    });
+
+    res.json(db);
+
+});
+
 module.exports = router;
